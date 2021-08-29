@@ -251,10 +251,10 @@ function init () {
 
   scene = new THREE.Scene()
   scene.background = new THREE.Color(1,1,1)
-  camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
-  camera.position.x = 1000
-  camera.position.y = 1000
-  camera.position.z = 1000
+  camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 100 )
+  camera.position.x = 100
+  camera.position.y = -100
+  camera.position.z = 100
 
   renderer = new THREE.WebGLRenderer({antialias: true})
   renderer.setPixelRatio( window.devicePixelRatio )
