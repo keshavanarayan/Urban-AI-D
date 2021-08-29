@@ -22,15 +22,6 @@ const metric_slider = document.getElementById( 'rangeValue2' )
 metric_slider.addEventListener( 'mouseup', onSliderChange, false )
 metric_slider.addEventListener( 'touchend', onSliderChange, false )
 
-function rangeSlide(value) {
-          document.getElementById('rangeValue').innerHTML = value;
-      }
-function rangeSlide1(value) {
-          document.getElementById('rangeValue1').innerHTML = value;
-      }
-function rangeSlide2(value) {
-          document.getElementById('rangeValue2').innerHTML = value;
-      }
 
 const plan_checkbox = document.querySelector('input[id="RH_IN:Plan"]');
 plan_checkbox.addEventListener( 'change', onSliderChange, false )
