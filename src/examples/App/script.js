@@ -263,6 +263,18 @@ function init () {
 
   controls = new OrbitControls( camera, renderer.domElement  )
 
+  controls = new OrbitControls( camera, renderer.domElement  )
+  controls.target.set(90, 67, 0);
+
+  // add a directional light
+  const directionalLight = new THREE.DirectionalLight( 0xffffff )
+  directionalLight.intensity = 2
+  scene.add( directionalLight )
+ 
+ 
+  const ambientLight = new THREE.AmbientLight()
+  scene.add( ambientLight )
+
   window.addEventListener( 'resize', onWindowResize, false )
 
   animate()
