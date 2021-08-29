@@ -183,7 +183,7 @@
             <div class="session">
               <label for="Distance From Point" style="color:rgb(0, 0, 0)"></label>
               <div id="rangeValue" style='font-size: 30px;'>1000</div>
-              <input type="range" id="rangeValue" value="1000" min="0" max="1000" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)">
+              <input type="range" id="rangeValue" value="1000" min="0" max="1000">
               
             </div>
             
@@ -211,7 +211,7 @@
             <div class="session">
               <label for="Year of Prediction" style="color:rgb(0, 0, 0)"></label>
               <div id="rangeValue1" style='font-size: 30px;'>2021</div>
-              <input type="range" id="rangeValue1" value="2020" min="2000" max="2050" onChange="rangeSlide1(this.value)" onmousemove="rangeSlide1(this.value)">
+              <input type="range" id="rangeValue1" value="2020" min="2000" max="2050" >
               
             </div>
             
@@ -251,7 +251,7 @@
             <div class="session">
               <label for="Metric of Prediction" style="color:rgb(0, 0, 0)"></label>
               <div id="rangeValue2" style='font-size: 30px;'>0</div>
-              <input type="range" id="rangeValue2" value="0" min="0" max="5" onChange="rangeSlide2(this.value)" onmousemove="rangeSlide2(this.value)">
+              <input type="range" id="rangeValue2" value="0" min="0" max="5" >
 
             </div>
             
@@ -275,19 +275,8 @@
           <label for="Display in Plan or 3d" style="color:rgb(0, 0, 0)" ><p style="font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif">Display in Plan or 3d ><input type="checkbox" id="RH_IN:Plan" checked> </p></label>
         </div> 
 
-        <script type="text/javascript">
-          function rangeSlide(value) {
-              document.getElementById('rangeValue').innerHTML = value;
-          }
-          function rangeSlide1(value) {
-              document.getElementById('rangeValue1').innerHTML = value;
-          }
-          function rangeSlide2(value) {
-              document.getElementById('rangeValue2').innerHTML = value;
-          }
-    
-      </script>
-        
+
+       
         <div>
         <script type="module" src="./script.js"></script>
         </div>
