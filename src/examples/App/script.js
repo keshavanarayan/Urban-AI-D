@@ -149,8 +149,10 @@ async function compute () {
         doc.delete()
   } catch {}
 
-  //console.log(values)
+
+
   doc = new rhino.File3dm()
+
 
   // for each output (RH_OUT:*)...
   for ( let i = 0; i < values.length; i ++ ) {
@@ -175,14 +177,16 @@ async function compute () {
     return
   }
 
+
   // load rhino doc into three.js scene
   const buffer = new Uint8Array(doc.toByteArray()).buffer
   loader.parse( buffer, function ( object ) 
   {
 
+  
       // clear objects from scene
       scene.traverse(child => {
-        if ( child.userData.hasOwnProperty( 'objectType' ) && child.userData.objectType === 'File3dm') {
+        if ( child.userData.hasOwnProperty( 'objectType' ) && child.name !== 'context') {
           scene.remove( child )
         }
       })
@@ -235,6 +239,7 @@ return null
  */
 function onSliderChange () {
   // show spinner
+
   showSpinner(true)
   compute()
 }
@@ -252,9 +257,8 @@ function onSliderChange () {
 // BOILERPLATE //
 
 var scene, camera, renderer, controls
-
-function init () {
-
+function init() 
+{
   // Rhino models are z-up, so set this as the default
   THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
 
@@ -269,8 +273,6 @@ function init () {
   renderer.setPixelRatio( window.devicePixelRatio )
   renderer.setSize( window.innerWidth, window.innerHeight )
   document.body.appendChild(renderer.domElement)
-
-  controls = new OrbitControls( camera, renderer.domElement  )
 
   controls = new OrbitControls( camera, renderer.domElement  )
   controls.target.set(90, 67, 0);
@@ -299,6 +301,16 @@ function onWindowResize() {
   camera.updateProjectionMatrix()
   renderer.setSize( window.innerWidth, window.innerHeight )
   animate()
+}
+
+
+function loadContext() {
+  loader.load('context.3dm', function (object) {
+    object.traverse(child => {
+      child.name = 'context'
+    })
+    scene.add(object)
+  })
 }
 
 /**
@@ -334,5 +346,4 @@ function onWindowResize() {
   camera.position.copy( controls.target ).sub(direction);
   
   controls.update();
-  
 }
