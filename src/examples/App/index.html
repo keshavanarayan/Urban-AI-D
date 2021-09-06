@@ -31,6 +31,10 @@
             text-decoration: none;
             color: #800080;
             }
+
+            #overfl{
+              overflow: auto;
+            }
             
             #console {
             position: absolute;
@@ -187,17 +191,6 @@
               <output style="font-size: 40px; font: monospace">1000</output>            
             </div>
             
-            <div class="session">
-                <div class="row colors">
-                </div>
-              <div class="row labels">
-                <div class="label">0</div>
-                <div class="label">......</div>
-                <div class="label">500</div>
-                <div class="label">......</div>
-                <div class="label">1000</div>                 
-           </div>
-
 
            <div class="leftsmall">
             A pedshed represents the area within walking distance from a central point. It is often visualized as a circle with a radius of 0.25 miles — the equivalent of a 5-minute walk.   <span class="ml1"></span>
@@ -210,7 +203,8 @@
             
             <div class="session">
               <label for="Year of Prediction" style="color:rgb(0, 0, 0)"></label>
-              <input type="range" id="rangeValue1" value="2020" min="2000" max="2050" >
+              <input type="range" id="rangeValue1" value="2020" min="2000" max="2050" oninput="this.nextElementSibling.value = this.value" >
+              <output style="font-size: 40px; font: monospace">2020</output>
               
             </div>
             
@@ -249,32 +243,22 @@
             <h2>Metric of Prediction</h2>
             <div class="session">
               <label for="Metric of Prediction" style="color:rgb(0, 0, 0)"></label>
-              <input type="range" id="rangeValue2" value="0" min="0" max="5" >
+              <input type="range" id="rangeValue2" value="0" min="0" max="5" oninput="this.nextElementSibling.value = this.value" >
+              <output style="font-size: 40px; font: monospace">0</output>
 
             </div>
             
-            <div class="session">
-                <div class="row colors">
-                </div>
-              <div class="row labels">
-                <div class="label">0</div>
-                <div class="label">......</div>
-                <div class="label">2</div>
-                <div class="label">......</div>
-                <div class="label">5</div>                 
-              </div>
 
             <p> </p>
             <p> </p>
           
-          <label for="Display Analysis within Radius only" style="color:rgb(0, 0, 0)" ><p style="font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif">Display Analysis within Radius<input type="checkbox" id="RH_IN:Circle"></p></label>
+          <label for="Display Analysis within Radius only" style="color:rgb(0, 0, 0)" ><p style="font-size: 15px; font-family: sans-serif; font-weight: bold;">Display Analysis within Radius<input type="checkbox" id="RH_IN:Circle"></p></label>
 
 
-          <label for="Display in Plan or 3d" style="color:rgb(0, 0, 0)" ><p style="font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif">Display in Plan or 3d ><input type="checkbox" id="RH_IN:Plan" checked> </p></label>
+          <label for="Display in Plan or 3d" style="color:rgb(0, 0, 0)" ><p style="font-size: 15px; font-family: sans-serif; font-weight: bold;">Display in Plan or 3d ><input type="checkbox" id="RH_IN:Plan" checked> </p></label>
         </div> 
 
 
-       
         <div>
         <script type="module" src="./script.js"></script>
         </div>
