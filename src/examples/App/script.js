@@ -280,7 +280,7 @@ function init()
   document.body.appendChild(renderer.domElement)
 
   controls = new OrbitControls( camera, renderer.domElement  )
-  controls.target.set(90, 67, 0);
+  //controls.target.set(90, 67, 0);
 
   // add a directional light
   const directionalLight = new THREE.DirectionalLight( 0xffffff )
@@ -296,11 +296,154 @@ function init()
   animate()
 }
 
-var animate = function () {
-  requestAnimationFrame( animate )
-  renderer.render( scene, camera )
-}
+/**
+ * Call appserver
+ */
+ async function compute() {
+  // construct url for GET /solve/definition.gh?name=value(&...)
+  const url = new URL('/solve/' + data.definition, window.location.origin)
+  Object.keys(data.inputs).forEach(key => url.searchParams.append(key, data.inputs[key]))
+  console.log(url.toString())
   
+  try {
+    const response = await fetch(url)
+  
+    if(!response.ok) {
+      // TODO: check for errors in response json
+      throw new Error(response.statusText)
+    }
+
+    const responseJson = await response.json()
+
+    collectResults(responseJson)
+
+  } catch(error) {
+    console.error(error)
+  }
+}
+
+/**
+ * Parse response
+ */
+function collectResults(responseJson) {
+
+    const values = responseJson.values
+
+    // clear doc
+    if( doc !== undefined)
+        doc.delete()
+
+    //console.log(values)
+    doc = new rhino.File3dm()
+
+    // for each output (RH_OUT:*)...
+    for ( let i = 0; i < values.length; i ++ ) {
+      // ...iterate through data tree structure...
+      for (const path in values[i].InnerTree) {
+        const branch = values[i].InnerTree[path]
+        // ...and for each branch...
+        for( let j = 0; j < branch.length; j ++) {
+          // ...load rhino geometry into doc
+          const rhinoObject = decodeItem(branch[j])
+          if (rhinoObject !== null) {
+            doc.objects().add(rhinoObject, null)
+          }
+        }
+      }
+    }
+
+    if (doc.objects().count < 1) {
+      console.error('No rhino objects to load!')
+      showSpinner(false)
+      return
+    }
+
+    // load rhino doc into three.js scene
+    const buffer = new Uint8Array(doc.toByteArray()).buffer
+    loader.parse( buffer, function ( object ) 
+    {
+        // debug 
+        /*
+        object.traverse(child => {
+          if (child.material !== undefined)
+            child.material = new THREE.MeshNormalMaterial()
+        }, false)
+        */
+
+        // clear objects from scene. do this here to avoid blink
+        scene.traverse(child => {
+            if (!child.isLight) {
+                scene.remove(child)
+            }
+        })
+
+        // add object graph from rhino model to three.js scene
+        scene.add( object )
+
+        // hide spinner and enable download button
+        showSpinner(false)
+        downloadButton.disabled = false
+
+        // zoom to extents
+        zoomCameraToSelection(camera, controls, scene.children)
+    })
+}
+
+/**
+ * Attempt to decode data tree item to rhino geometry
+ */
+function decodeItem(item) {
+  const data = JSON.parse(item.data)
+  if (item.type === 'System.String') {
+    // hack for draco meshes
+    try {
+        return rhino.DracoCompression.decompressBase64String(data)
+    } catch {} // ignore errors (maybe the string was just a string...)
+  } else if (typeof data === 'object') {
+    return rhino.CommonObject.decode(data)
+  }
+  return null
+}
+
+/**
+ * Called when a slider value changes in the UI. Collect all of the
+ * slider values and call compute to solve for a new scene
+ */
+function onSliderChange () {
+  showSpinner(true)
+  // get slider values
+  let inputs = {}
+  for (const input of document.getElementsByTagName('input')) {
+    switch (input.type) {
+    case 'number':
+      inputs[input.id] = input.valueAsNumber
+      break
+    case 'range':
+      inputs[input.id] = input.valueAsNumber
+      break
+    case 'checkbox':
+      inputs[input.id] = input.checked
+      break
+    }
+  }
+  
+  data.inputs = inputs
+
+  compute()
+}
+
+/**
+ * The animation loop!
+ */
+function animate() {
+  requestAnimationFrame( animate )
+  controls.update()
+  renderer.render(scene, camera)
+}
+
+/**
+ * Helper function for window resizes (resets the camera pov and renderer size)
+  */
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
@@ -308,20 +451,10 @@ function onWindowResize() {
   animate()
 }
 
-
-function loadContext() {
-  loader.load('context.3dm', function (object) {
-    object.traverse(child => {
-      child.name = 'context'
-    })
-    scene.add(object)
-  })
-}
-
 /**
  * Helper function that behaves like rhino's "zoom to selection", but for three.js!
  */
- function zoomCameraToSelection( camera, controls, selection, fitOffset = 1.2 ) {
+function zoomCameraToSelection( camera, controls, selection, fitOffset = 1.2 ) {
   
   const box = new THREE.Box3();
   
@@ -351,4 +484,5 @@ function loadContext() {
   camera.position.copy( controls.target ).sub(direction);
   
   controls.update();
+  
 }
