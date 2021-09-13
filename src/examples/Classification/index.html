@@ -73,7 +73,6 @@
             }
 
 
-            /* Style the tab content */
 
             div.left {
             text-align: left;
@@ -152,7 +151,7 @@
     <body>
         <div id="loader"></div> 
         
-        <a href="https://keshavanarayan82.wixsite.com/urbanai" class="button" >Back</a>
+        <a href="https://urbanaiinterface.herokuapp.com/examples/App" class="button" style="align-self: right;">Back</a>
 
         <div id="console">
 
@@ -160,13 +159,9 @@
             <p> .URBAN (AI)D.  </p>
           </div>
 
-          <a href="https://urbanaiinterface.herokuapp.com/examples/Classification" class="button" style="align-self: right;">Classification</a>
-          <a href="https://urbanaiinterface.herokuapp.com/examples/App/" class="button_" style="align-self: right;">Prediction</a>
+          <a href="https://urbanaiinterface.herokuapp.com/examples/Classification" class="button_" style="align-self: right;">Classification</a>
+          <a href="https://urbanaiinterface.herokuapp.com/examples/App/" class="button" style="align-self: right;">Prediction</a>
 
-          <p>  </p>
-          <p>  </p>
-          <p>  </p>
-          <p>  </p>
 
           <div class="leftsmall">
             The Urban(AI)can predict the needs of the city over the period of 20 years from now. The data extracted is from OECD Portgual. Learn more about the dataset<span class="ml1"></span>
@@ -175,76 +170,29 @@
 
 
           
-          <div id="console">
-            
-            <h2>Distance From Point</h2>
-            <div class="session">
-              <label for="Distance From Point" style="color:rgb(0, 0, 0)"></label>
-
-              <input type="range" id="rangeValue" value="1000" min="0" max="1000" style ='accent-color: black;' oninput="this.nextElementSibling.value = this.value" >
-              <output style="font-size: 40px; font: monospace;">1000</output>            
-            </div>
-            
-
-           <div class="leftsmall">
-            A pedshed represents the area within walking distance from a central point. It is often visualized as a circle with a radius of 0.25 miles — the equivalent of a 5-minute walk.   <span class="ml1"></span>
-            <a href="https://morphocode.com/the-5-minute-walk/" target="_blank" rel="noopener" class="b--black-20 bb black-60 hover-b--black hover-black link">Learn more</a></p>
-          </div>
-
-
-          <div id="consoleA">
-            <h2>Year of Prediction</h2>
-            
-            <div class="session">
-              <label for="Year of Prediction" style="color:rgb(0, 0, 0)"></label>
-              <input type="range" id="rangeValue1" value="2030" min="2000" max="2050" style ='accent-color: black;' oninput="this.nextElementSibling.value = this.value" >
-              <output style="font-size: 40px; font: monospace">2030</output>
-              
-            </div>
-            
-            <div class="session">
-                <div class="row colors">
-                </div>
-              <div class="row labels">
-                <div class="label">2000</div>
-                <div class="label">......</div>
-                <div class="label">2025</div>
-                <div class="label">......</div>
-                <div class="label">2050</div>                 
-              </div>
-
-            
-        <p> </p>
-        <p> </p>
-
-
           <div class="leftsmall">
-            <p>The Urban(AI)can predict the needs of the city over the period of 20 years from now. </p>
+            <p>The desirable localities are measured using OSM data. The metrics used to measure the desirabiilty are as follows. </p>
             <p>The metrics measured here are as follows.</p>
-            <p>0. Change in green space for every 1 sq.km</p>
-            <p>1. Change in Ratio of Amenities every 1 sq.km</p>
-            <p>2. Change in Public Transport every 1 sq.km</p>
-            <p>3. Predicted Increase in Educational Facilities for every 1 sq.km</p>
-            <p>4. Predicted Increase / Decrease in Solid Waste Generation for every 1 sq.km</p>
-            <p>5. Population density per hexagon for every 1 sq.km</p>
+            <p>0. Mass to void ratio in hexagon </p>
+            <p>1. Proximity to healthcare </p>
+            <p>2. Proximity to Parks / Open Space</p>
+            <p>3. Amenities per capita</p>
+            <p>4. Education facilities per capita</p>
+            <p>Area of Green Space per capita</p>
+            <p>Area of commercial to residential</p>
+            <p>5. Population density per hexagon </p>
 
             <span class="ml1"></span>
             <a href="https://www.oecd.org/portugal/" target="_blank" rel="noopener" class="b--black-20 bb black-60 hover-b--black hover-black link">Learn more</a></p>
           </div>
 
 
-          <div id="consoleA">
-            <h2>Metric of Prediction</h2>
-            <div class="session">
-              <label for="Metric of Prediction" style="color:rgb(0, 0, 0)"></label>
-              <input type="range" id="rangeValue2" value="0" min="0" max="5" style ='accent-color: black;' oninput="this.nextElementSibling.value = this.value" >
-              <output style="font-size: 40px; font: monospace">0</output>
           
           <div id="consoleA">
                 <h2>Select Lowest score areas according to classification</h2>
                 <div class="session">
                   <label for="Lowest Score" style="color:rgb(0, 0, 0)"></label>
-                  <input type="range" id="rangeValue3" value="3" min="1" max="10" style ='accent-color: black;' oninput="this.nextElementSibling.value = this.value" >
+                  <input type="range" id="rangeValue" value="3" min="1" max="10" style ='accent-color: black;' oninput="this.nextElementSibling.value = this.value" >
                  <output style="font-size: 40px; font: monospace">3</output>
 
             
@@ -252,10 +200,10 @@
             <p> </p>
             <p> </p>
           
-          <label for="Display Analysis within Radius only" style="color:rgb(0, 0, 0)" ><p style="font-size: 15px; font-family: sans-serif; font-weight: bold;accent-color: black;">Display Analysis within Radius > <input type="checkbox" id="RH_IN:Circle"></p></label>
+          <label for="Display Lowest Score Hexagons Only" style="color:rgb(0, 0, 0)" ><p style="font-size: 15px; font-family: sans-serif; font-weight: bold;accent-color: black;">Display Lowest Score Hexagons Only > <input type="checkbox" id="RH_IN:LowestOnly"></p></label>
 
 
-          <label for="Display Budget Analysis " style="color:rgb(0, 0, 0)" ><p style="font-size: 15px; font-family: sans-serif; font-weight: bold; accent-color: black;">Display Budget Analysis ><input type="checkbox" id="RH_IN:DisplayBudget"> </p></label>
+         
         </div> 
 
 
