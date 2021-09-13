@@ -260,6 +260,13 @@
               <label for="Metric of Prediction" style="color:rgb(0, 0, 0)"></label>
               <input type="range" id="rangeValue2" value="0" min="0" max="5" style ='accent-color: black;' oninput="this.nextElementSibling.value = this.value" >
               <output style="font-size: 40px; font: monospace">0</output>
+          
+          <div id="consoleA">
+                <h2>Select Lowest score areas according to classification</h2>
+                <div class="session">
+                  <label for="Lowest Score" style="color:rgb(0, 0, 0)"></label>
+                  <input type="range" id="rangeValue3" value="3" min="1" max="10" style ='accent-color: black;' oninput="this.nextElementSibling.value = this.value" >
+                 <output style="font-size: 40px; font: monospace">3</output>
 
             
 
@@ -268,8 +275,6 @@
           
           <label for="Display Analysis within Radius only" style="color:rgb(0, 0, 0)" ><p style="font-size: 15px; font-family: sans-serif; font-weight: bold;accent-color: black;">Display Analysis within Radius > <input type="checkbox" id="RH_IN:Circle"></p></label>
 
-
-          <label for="Display in Plan or 3d" style="color:rgb(0, 0, 0)" ><p style="font-size: 15px; font-family: sans-serif; font-weight: bold; accent-color: black;">Display in Plan or 3d ><input type="checkbox" id="RH_IN:Plan" checked> </p></label>
 
           <label for="Display Budget Analysis " style="color:rgb(0, 0, 0)" ><p style="font-size: 15px; font-family: sans-serif; font-weight: bold; accent-color: black;">Display Budget Analysis ><input type="checkbox" id="RH_IN:DisplayBudget"> </p></label>
         </div> 

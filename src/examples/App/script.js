@@ -21,10 +21,12 @@ year_slider.addEventListener( 'touchend', onSliderChange, false )
 const metric_slider = document.getElementById( 'rangeValue2' )
 metric_slider.addEventListener( 'mouseup', onSliderChange, false )
 metric_slider.addEventListener( 'touchend', onSliderChange, false )
+const score_slider = document.getElementById( 'rangeValue3' )
+score_slider.addEventListener( 'mouseup', onSliderChange, false )
+score_slider.addEventListener( 'touchend', onSliderChange, false )
 
 
-const plan_checkbox = document.querySelector('input[id="RH_IN:Plan"]');
-plan_checkbox.addEventListener( 'change', onSliderChange, false )
+
 const circle_checkbox = document.querySelector('input[id="RH_IN:Circle"]');
 circle_checkbox.addEventListener( 'change', onSliderChange, false )
 const budget_checkbox = document.querySelector('input[id="RH_IN:DisplayBudget"]');
@@ -107,9 +109,9 @@ async function compute () {
       'rangeValue': distance_slider.valueAsNumber,
       'rangeValue1': year_slider.valueAsNumber,
       'rangeValue2': metric_slider.valueAsNumber,
+      'rangeValue3': score_slider.valueAsNumber,
       'point': point,
 
-      'RH_IN:Plan': plan_checkbox.checked,
       'RH_IN:Circle': circle_checkbox.checked,
       'RH_IN:DisplayBudget': circle_checkbox.checked,
     }
