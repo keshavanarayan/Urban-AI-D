@@ -191,7 +191,7 @@ async function compute () {
   
       // clear objects from scene
       scene.traverse(child => {
-        if ( !child.isLight && child.name !== 'context') {
+        if ( child.userData.hasOwnProperty( 'objectType' ) && child.name !== 'context') {
           scene.remove( child )
         }
       })
