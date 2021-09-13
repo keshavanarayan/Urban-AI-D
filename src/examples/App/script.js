@@ -43,7 +43,7 @@ rhino3dm().then(async m => {
   init()
   rndPts()
   compute()
-  zoomCameraToSelection()
+  //zoomCameraToSelection()
 })
 
 function rndPts() {
