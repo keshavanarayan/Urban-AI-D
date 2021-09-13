@@ -183,24 +183,18 @@ async function compute () {
   }
 
 
-      // load rhino doc into three.js scene
-      const buffer = new Uint8Array(doc.toByteArray()).buffer
-      loader.parse( buffer, function ( object ) 
-      {
-          // debug 
-          /*
-          object.traverse(child => {
-            if (child.material !== undefined)
-              child.material = new THREE.MeshNormalMaterial()
-          }, false)
-          */
+  // load rhino doc into three.js scene
+  const buffer = new Uint8Array(doc.toByteArray()).buffer
+  loader.parse( buffer, function ( object ) 
+  {
+
   
-          // clear objects from scene. do this here to avoid blink
-          scene.traverse(child => {
-              if (!child.isLight) {
-                  scene.remove(child)
-              }
-          })
+      // clear objects from scene
+      scene.traverse(child => {
+        if ( !child.isLight && child.name !== 'context') {
+          scene.remove( child )
+        }
+      })
 
       ///////////////////////////////////////////////////////////////////////
       
