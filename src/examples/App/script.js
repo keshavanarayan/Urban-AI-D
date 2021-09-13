@@ -27,6 +27,8 @@ const plan_checkbox = document.querySelector('input[id="RH_IN:Plan"]');
 plan_checkbox.addEventListener( 'change', onSliderChange, false )
 const circle_checkbox = document.querySelector('input[id="RH_IN:Circle"]');
 circle_checkbox.addEventListener( 'change', onSliderChange, false )
+const budget_checkbox = document.querySelector('input[id="RH_IN:DisplayBudget"]');
+budget_checkbox.addEventListener( 'change', onSliderChange, false )
 
 let point = []
 
@@ -109,6 +111,7 @@ async function compute () {
 
       'RH_IN:Plan': plan_checkbox.checked,
       'RH_IN:Circle': circle_checkbox.checked,
+      'RH_IN:DisplayBudget': circle_checkbox.checked,
     }
   }
 
