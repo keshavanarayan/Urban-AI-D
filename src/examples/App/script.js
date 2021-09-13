@@ -312,5 +312,9 @@ function download () {
 /**
  * Shows or hides the loading spinner
  */
-function showSpinner(enable) {
+ function showSpinner(enable) {
   if (enable)
+    document.getElementById('loader').style.display = 'block'
+  else
+    document.getElementById('loader').style.display = 'none'
+}
